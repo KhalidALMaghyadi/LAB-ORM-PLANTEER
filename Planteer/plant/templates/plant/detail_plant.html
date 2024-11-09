@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} plant Detail {% endblock %}
+
+{% block content %}
+{%load static%}
+<section>
+    <div class="container" > 
+       <h2> {{detail_plant.name}}</h2>
+        <div class="row">
+            <div class="col">
+                <img src="{{detail_plant.image.url}}" class="w-100">
+                <p>{{detail_plant.about}}</p>
+                <p> Ues by :{{detail_plant.used_for}}</p>
+                <p>Category: {{detail_plant.category}}</p>
+                <div class="d-flex justify-content-end pb-3 gap-2">
+                    <a href="{% url 'plant:update_plant_view' detail_plant.id %}" class="btn btn-primary">Update</a>
+                    <a href="{% url 'plant:delete_plant_view' detail_plant.id %}" class="btn btn-danger">Delete</a>
+                </div>
+
+            </div>
+        </div>
+       
+        <h3>Related Plants</h3>
+        <div class="row">
+            {% for plant in related_plants %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{{ plant.image.url }}"  alt="{{ plant.name }} "style="height: 150px; object-fit: cover";>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ plant.name }}</h5>
+                        <a href="{% url 'plant:detail_plant_view' plant.id %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        
+    </div>
+</section>
+
+{% endblock %} 

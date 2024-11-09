@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+
+{% block title %} All Plants {% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>All Plants</h2>
+
+    
+    <form method="get" class="mb-4">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="category" class="form-label">Category</label>
+                <select name="category" id="category" class="form-select">
+                    <option value="">All Categories</option>
+                    <option value="Tree" {% if category == 'Tree' %}selected{% endif %}>Tree</option>
+                    <option value="Fruit" {% if category == 'Fruit' %}selected{% endif %}>Fruit</option>
+                    <option value="Vegetables" {% if category == 'Vegetables' %}selected{% endif %}>Vegetables</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="is_edible" class="form-label">Is Edible</label>
+                <select name="is_edible" id="is_edible" class="form-select">
+                    <option value="">All</option>
+                    <option value="true" {% if is_edible == 'true' %}selected{% endif %}>Yes</option>
+                    <option value="false" {% if is_edible == 'false' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for view in plants_list %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ view.image.url }}" alt="   " class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <a href="{% url 'plant:detail_plant_view' view.id %}">
+                        <h5 class="card-title">{{ view.name }}</h5>
+                    </a>
+                    <p class="card-text">Category: {{ view.category }}</p>
+                    <p class="card-text">Edible: {{ view.is_edible|yesno:"Yes,No" }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

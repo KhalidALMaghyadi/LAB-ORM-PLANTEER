@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Messages from Users{% endblock %}
+
+{% block content %}
+<section>
+<div class="container">
+    <h2 class="mb-4">Messages from Users</h2>
+    <div class="row">
+        {% for view in data %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{view.first_name}} {{ view.last_name }} </h5>
+                    </a>
+                    <p class="text-primary mb-2">{{ view.email }}</p>                    
+                    <p class="card-text">{{  view.message }}</p>   
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</section>
+{% endblock %}

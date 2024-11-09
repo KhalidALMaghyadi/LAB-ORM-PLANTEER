@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} Update Plant {% endblock %}
+
+{% block content %}
+{%load static%}
+<section>
+    <h1 class="ps-5">Update Plant</h1>
+    <div class="d-flex justify-content-center align-items-center vh-100 ">
+        <form action="{%url 'plant:update_plant_view' update_plant.id%}" method="post" enctype="multipart/form-data" class="w-50">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text"  name="name" class="form-control" value="{{update_plant.name}}"  placeholder="Enter plant name" required>
+            </div>
+            <div class="mb-3">
+                <label for="about" class="form-label">About</label>
+                <textarea  name="about" class="form-control"  placeholder="Enter details about the plant" rows="3" required>{{update_plant.about}} </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="used_for" class="form-label">Used For</label>
+                <textarea name="used_for" class="form-control" placeholder="Enter the uses of the plant" rows="3" required>{{update_plant.used_for}}</textarea>
+            </div>
+        
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{update_plant.image.url}}" class="w-100">
+                    </div>
+                    <div class="col">
+                        <input type="file"  name="image" class="form-control" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <select name="category" class="form-select" required>
+                <option>Category</option>
+                    <option value="Tree" {% if update_plant.category == 'Tree' %}selected{% endif %} >Tree</option>
+                    <option value="Fruit" {% if update_plant.category == 'Fruit' %}selected{% endif %} >Fruit</option>
+                    <option value="Vegetables" {% if update_plant.category == 'Vegetables' %}selected{% endif %} >Vegetables</option>
+                </select>
+            </div>
+
+            <input type="submit" class="btn btn-primary " value="Update" >
+        </form>
+    </div>
+
+</section>
+
+{% endblock %} 

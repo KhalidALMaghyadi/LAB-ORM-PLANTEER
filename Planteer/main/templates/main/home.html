@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{%load static%}
+    <section>
+        <div class="container-fluid justify-content-center section-bg text-dark align-items-center mb-3">
+            <h1>Planteer</h1>
+            <h2>Database For Plants lovers</h2>
+            <form class="d-flex" role="search" method="get" action="{%url 'plant:search_plant_view' %}">
+                <input class="form-control pe-5 me-2" type="search" name="search" placeholder="Search For Plant...">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <section>
+    <div class="container my-5">
+        <h2>Plants</h2>
+        <p>Learn more about plants</p>
+        <div class="row">
+            {% for view in Plants %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ view.image.url }}" class="card-img-top" alt="Plant Image">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ view.name }}</h5>
+                        <p class="card-text font-weight-bold">{{ view.category }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-end">
+            <a href="{% url 'plant:all_plant_view' %}" class="btn btn-link">More →</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %} 

@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+{%load static%}
+{% block content %}
+<section>
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-md-6">
+            <h2>Contact us</h2>
+            <p class="text-muted">Subheading for description or instructions</p>
+            
+            <form method="post" action="{% url 'main:contact_view' %}" >
+                {% csrf_token %}
+                
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="first_name" class="form-label">First name</label>
+                        <input type="text"  name="first_name" class="form-control" placeholder="Jane" required>
+                    </div>
+                
+                    <div class="col">
+                        <label for="last_name" class="form-label">Last name</label>
+                        <input type="text"  name="last_name" class="form-control" placeholder="Smitherson" required>
+                    </div>
+                </div>
+
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" placeholder="email@yourdomain.net" required>
+                </div>
+
+               
+                <div class="mb-4">
+                    <label for="message" class="form-label">Your message</label>
+                    <textarea  name="message" class="form-control" rows="4" placeholder="Enter your question or message" required></textarea>
+                </div>
+
+               
+                <button type="submit" class="btn btn-dark w-100">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'image/WhatsAppImageas.jpg' %}" alt="Contact Us Image"  class="rounded" width="320" height="500">
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}

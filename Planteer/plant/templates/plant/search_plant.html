@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Search Plants {% endblock %}
+
+{% block content %}
+
+{%if search_plant %}
+<h2 class="m-5">Search Results</h2>
+<h3 class="m-5">results for: {{request.GET.search}}</h3>       
+{% else %}
+<div class="d-flex justify-content-center">
+    <p class="p-3 mb-2 bg-success-subtle text-success-emphasis text-center">
+        No results found for your search: "{{ request.GET.search }}"
+    </p>
+</div>
+{% endif %}
+<section class="d-flex align-items-center justify-content-center" style="min-height: 30vh;">
+    <div class="container text-center">
+        <form class="d-flex justify-content-center" role="search" method="get" action="{% url 'plant:search_plant_view' %}">
+            <input class="form-control me-2 w-50" type="search" name="search" placeholder="Search For Plant..." required minlength="2">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+</section>
+
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            {% for plant in search_plant %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ plant.image.url }}" alt="Plant Image" class="card-img-top">
+                    <div class="card-body">
+                        <a href="{% url 'plant:detail_plant_view' plant.id %}">
+                            <h5 class="card-text">{{ plant.name }}</h5>
+                        </a>
+                        <p class="card-text">Category: {{ plant.category }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
