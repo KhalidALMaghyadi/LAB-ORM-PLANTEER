@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpRequest , HttpResponse
 # Create your views here.
 from .models import Contact
@@ -23,3 +23,12 @@ def contact_messages(request:HttpRequest):
     data = Contact.objects.all()
 
     return render (request , 'main/contacUsMessages.html' , {'data':data})
+
+
+def det_view(request:HttpRequest , con_id):
+    
+
+    delete_= Contact.objects.get(pk=con_id)
+    delete_.delete()
+ 
+    return redirect('main:home_view')

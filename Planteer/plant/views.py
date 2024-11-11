@@ -7,7 +7,7 @@ from .models import Plant
 def new_add_view(request : HttpRequest):
 
     if request.method == "POST":
-        new_data = Plant(name=request.POST["name"], about=request.POST["about"],used_for=request.POST["used_for"], image=request.FILES["image"],category=request.POST["category"],is_edible= True,created_at = True) 
+        new_data = Plant(name=request.POST["name"], about=request.POST["about"],used_for=request.POST["used_for"], image=request.FILES["image"],category=request.POST["category"],is_edible=request.POST["is_edible"],created_at = True) 
         new_data.save()
     return render(request,'plant/new_add.html') 
 

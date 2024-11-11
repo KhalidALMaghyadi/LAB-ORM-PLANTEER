@@ -14,8 +14,10 @@
                     <h5 class="card-title">{{view.first_name}} {{ view.last_name }} </h5>
                     </a>
                     <p class="text-primary mb-2">{{ view.email }}</p>                    
-                    <p class="card-text">{{  view.message }}</p>   
+                    <p class="card-text">{{  view.message }}</p>
+
                 </div>
+                <!-- <a href="{% url 'main:det_view' view.id %}" class="btn btn-danger">Delete</a> -->
             </div>
         </div>
         {% endfor %}

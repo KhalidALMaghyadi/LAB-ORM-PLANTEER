@@ -16,7 +16,7 @@ class Plant(models.Model):
     categoryChoices= models.TextChoices("Category", "Tree Fruit Vegetables")
     category  = models.CharField(max_length=64, choices=categoryChoices.choices, default=categoryChoices.Tree)
     
-    is_edible = models.BooleanField(default=False)
+    is_edible = models.BooleanField()
 
     created_at = models.DateTimeField(auto_now_add=True)    
     
